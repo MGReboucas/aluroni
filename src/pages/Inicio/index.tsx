@@ -1,13 +1,29 @@
-import Cardapio from 'pages/Cardapio/Itens/itens.json';
+import Cardapio from '../../data/cardapio.json';
+import styles from './inicio.module.scss';
 
-export default function Inicio(){
+
+export default function Inicio() {
+     let PratosRecomendados = [...Cardapio];
+     PratosRecomendados = PratosRecomendados.sort(() => 0.5 - Math.random()).splice(0, 3);
      return (
           <section>
-               <h3>
-                   Recomendações da cozinha 
+               <h3 className={styles.titulo}>
+                    Recomendações da cozinha
                </h3>
-               <div>
-                    
+               <div className={styles.recomendados}>
+                    {PratosRecomendados.map(item => (
+                         <div
+                              key={item.id}
+                              className={styles.recomendado}
+                         >
+                              <div className={styles.recomendado__imagem}>
+                                   <img src={item.photo} alt={item.title} />
+                              </div>
+                              <button className={styles.recomendado__botao}>
+                                   Ver Mais
+                              </button>
+                         </div>
+                    ))}
                </div>
           </section>
      );
